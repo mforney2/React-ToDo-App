@@ -1,25 +1,50 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import ToDo from './components/ToDo.js';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+      this.state = {
+        todos: [
+          { description:'Walk the cat', isCompleted: false },
+          { description: 'Wash the dishes' , isCompleted: false},
+          { description: 'Wash the car', isCompleted: false }
+        ],
+        newTodoDescription: ''
+      };
+    }
+
+    handleChange(e) {
+      this.setState({ newTodoDescription: e.target.value })
+    }
+
+    handleSubmit(e) {
+      e.preventDefault();
+      if (!this.state.newTodoDescription) {return}
+      const newToDo = { description: this.state.newTodoDescription, isCompleted: false};
+      this.setState({ todos: [...this.state.todos, newToDo], newTodoDescription: '' })
+    }
+
+    toggleComplete(index) {
+      const todos = this.state.todos.slice();
+      const todo = todos[index];
+      todo.isCompleted = todo.isCompleted ? false : true;
+      this.setState({ todos: todos });
+    }
+
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        <ul>
+          { this.state.todos.map( (todo, index) =>
+            <ToDo key={ index } description={ todo.description } isCompleted={ todo.isCompleted } toggleComplete={ () => this.toggleComplete(index) } />
+          )}
+        </ul>
+        <form onSubmit={ (e) => this.handleSubmit(e) }>
+          <input type="text" value={ this.state.newTodoDescription } onChange={ (e) => this.handleChange(e) }/>
+          <input type="submit" />
+        </form>
       </div>
     );
   }
