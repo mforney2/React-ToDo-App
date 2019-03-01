@@ -1,5 +1,7 @@
 .App {
-  text-align: center;
+  text-align: left;
+  margin: 0 250px;
+  font-size: 1em;
 }
 
 .App-logo {
@@ -30,4 +32,40 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+/* Style for Elements */
+
+ol li:nth-child(even) {
+  background-color: lightgrey;
+}
+
+ol li:last-child {
+  border-bottom: solid black 2px;
+}
+
+h1 {
+  text-align: center;
+  border-bottom: solid black 4px;
+}
+
+li {
+  border-top: solid black 2px;
+  padding: 40px;
+  font-size: 1.2em;
+}
+
+form {
+padding: 20px 40px;
+}
+
+
+/* Classes */
+.container {
+  width: 16px;
+  height: 16px;
+}
+
+.container:after {
+  color: lightgreen;
 }

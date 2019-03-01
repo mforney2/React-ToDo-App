@@ -36,11 +36,12 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <ul>
+        <h1>To Do App</h1>
+        <ol>
           { this.state.todos.map( (todo, index) =>
             <ToDo key={ index } description={ todo.description } isCompleted={ todo.isCompleted } toggleComplete={ () => this.toggleComplete(index) } />
           )}
-        </ul>
+        </ol>
         <form onSubmit={ (e) => this.handleSubmit(e) }>
           <input type="text" value={ this.state.newTodoDescription } onChange={ (e) => this.handleChange(e) }/>
           <input type="submit" />
